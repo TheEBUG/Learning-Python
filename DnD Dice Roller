@@ -1,0 +1,45 @@
+# Simple DnD or other TableTop RPG Dice roller, First project in Python
+# Written by Evan Reeve
+
+
+
+# Imports go here
+from pip._vendor.distlib.compat import raw_input
+import sys
+from random import randrange
+
+# Welcome the user
+while True:
+        print("Hello, adventurer. You must be here to test your luck with dice.")
+        print('\n')
+
+# User indicate single dice type and number
+        dicetypenum = raw_input("Chose which dice to roll using the format XdX.")
+        dicenum = dicetypenum.split("d", 1)[0]
+        dicetype = dicetypenum.split("d", 2)[1]
+        sumrolls = 0
+        total = 0
+
+# User indicate modifiers applied to each die rolled
+        dicemod = raw_input("Any modifiers? ex. +3, -1")
+        print('\n')
+        summods = 0
+
+# Roll, add indicated modifier, add for total and print results
+        for x in range(1, (int(dicenum) + 1)):
+                roll = randrange(1, (int(dicetype) + 1))
+                totalroll = (roll + int(dicemod))
+                sumrolls = sumrolls + roll
+                summods = summods + int(dicemod)
+                total = totalroll + total
+
+        print(str(total) + " (" + str(sumrolls) + " + " + str(summods) + ")")
+
+# Repeat
+        print("Would you like to roll again?")
+        print("If so, please type 'y'. If not, please type 'n'.")
+        inp = raw_input()
+        if inp == "n":
+                break
+print("Goodbye and see you next time, adventurer!")
+sys.exit()
