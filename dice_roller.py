@@ -28,8 +28,11 @@ def get_dicemod():
     dicemod = 0
     got_valid_input = False
     while not got_valid_input:
-        dicemod = int(input("Any modifiers? ex. +3, -1: "))
-        got_valid_input = True
+        try:
+            dicemod = int(input("Any modifiers? ex. +3, -1: "))
+            got_valid_input = True
+        except:
+            print("Invalid input. Try again.k")
 
     return dicemod
 
