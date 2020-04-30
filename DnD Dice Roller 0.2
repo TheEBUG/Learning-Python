@@ -1,0 +1,79 @@
+#!/usr/bin/env/ python
+# Simple DnD or other TableTop RPG Dice roller, First project in Python
+# Written by Evan Reeve
+
+
+from random import randrange
+
+def get_dicenum_and_dicetype():
+        dicenum = 0
+        dicetype = 0
+
+        got_valid_input = False
+
+        while not got_valid_input:
+                try:
+                        dicetype_input = input("Chose which dice to roll using the format XdX.:")
+                        parts = dicetype_input.split("d")
+                        dicenum = int(parts[0])
+                        dicetype = int(parts[1])
+                        got_valid_input = True
+                except:
+                        print("Invalid input. Please try again.")
+
+        return dicenum, dicetype
+
+
+#user indicating dice modifiers for each die rolled
+
+def get_dicemod():
+        dicemod = 0
+
+        got_valid_input = False
+        while not got_valid_input:
+                try:
+                        dicemod = int(input("Need any modifiers? <ex. +3, -1>:"))
+                        got_valid_input =  True
+                except:
+                        print("Invalid input. Please try again.")
+
+        return dicemod
+
+def run_dice():
+        sumrolls = 0
+        total = 0
+
+        dicenum, dicetype = get_dicenum_and_dicetype()
+        dicemod = get_dicemod()
+
+# Roll, add indicated modifier, add for total and print results
+        for x in range(0, dicenum):
+                roll = randrange(1, dicetype + 1)
+                totalroll = roll + dicemod
+                sumrolls = sumrolls + roll
+                total += totalroll
+
+                print("Roll #{0} was {1} ({2} + {3})".format(x + 1, totalroll, roll, dicemod))
+
+        print("Your total is: {0}".format(total))
+#here is where I will add the Natural 20 critical hit ident. and counter
+
+
+#now define the main function
+def main():
+        print("Hello adventurer, you must be here to text your luck with the dice.\n")
+
+        running = True
+        while running:
+                run_dice()
+                resume = input("Would you like to roll again? (y/n): ").lower()
+                if resume == "n":
+                        break
+                elif resume == "y":
+                        return main()
+                else:
+                        print("Invalid input. Please try again.")
+
+        print("Goodbye and see you next time, adventurer!")
+
+main()
