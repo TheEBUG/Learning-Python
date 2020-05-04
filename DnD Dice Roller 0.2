@@ -46,7 +46,7 @@ def run_dice():
         dicenum, dicetype = get_dicenum_and_dicetype()
         dicemod = get_dicemod()
 
-# Roll, add indicated modifier, add for total and print results
+# Roll, add indicated modifier, add for total, ident Nat 20 rolls only on d20s and print results
         for x in range(0, dicenum):
                 roll = randrange(1, dicetype + 1)
                 totalroll = roll + dicemod
@@ -54,10 +54,11 @@ def run_dice():
                 total += totalroll
 
                 print("Roll #{0} was {1} ({2} + {3})".format(x + 1, totalroll, roll, dicemod))
-
+                if dicetype == 20 and roll == 20:
+                        print("A natural 20! Critical Success!")
+                else:
+                        pass
         print("Your total is: {0}".format(total))
-#here is where I will add the Natural 20 critical hit ident. and counter
-
 
 #now define the main function
 def main():
